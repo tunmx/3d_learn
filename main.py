@@ -66,7 +66,7 @@ def sample_a():
     length = 1
 
     # 定义立方体的8个顶点坐标
-    vertices = np.array([
+    vertices_w = np.array([
         [-length / 2, -length / 2, -length / 2],
         [-length / 2, -length / 2, length / 2],
         [-length / 2, length / 2, -length / 2],
@@ -88,7 +88,7 @@ def sample_a():
     # 相机外参 在什么位置看 正方体
     T = np.array([0, 0, 5])
 
-    vertices_transform = np.matmul(R_yaw, vertices.T).T + T
+    vertices_c = np.matmul(R_yaw, vertices_w.T).T + T
 
     # 定义相机内参
     fx = 1600
@@ -101,7 +101,7 @@ def sample_a():
         [0, 0, 1]
     ])
 
-    vertices_2d = perspective_projection(vertices_transform, K)
+    vertices_2d = perspective_projection(vertices_c, K)
     # vertices_2d = weak_perspective_projection(vertices_transform, s=200)
 
     show_vertices_2d(vertices_2d)
